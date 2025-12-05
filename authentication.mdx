@@ -1,0 +1,128 @@
+---
+title: Authentication
+description: Learn how to authenticate with Aaron AI's API and manage access tokens securely.
+---
+
+## Authentication Overview
+
+Aaron AI uses secure token-based authentication to ensure that only authorized users and applications can access your documentation resources. This guide covers the different authentication methods available and best practices for managing credentials.
+
+<Callout kind="info">All API requests must include valid authentication credentials to access protected resources.</Callout>
+
+## API Key Authentication
+
+The primary method for authenticating API requests is through API keys. These keys are generated per user or application and provide granular access control.
+
+<Steps>
+  <Step title="Generate API Key" icon="key">
+    Navigate to your account settings and create a new API key with appropriate permissions.
+  </Step>
+  <Step title="Include in Requests" icon="send">
+    Add the API key to the Authorization header for all API calls.
+  </Step>
+  <Step title="Rotate Regularly" icon="refresh-cw">
+    Regularly rotate your API keys to maintain security.
+  </Step>
+</Steps>
+
+<Tabs>
+  <Tab title="cURL" icon="terminal">
+    ```bash
+    curl -H "Authorization: Bearer YOUR_API_KEY" \
+         https://api.aaron.ai/v1/documents
+    ```
+  </Tab>
+  <Tab title="Python" icon="code">
+    ```python
+import requests
+
+headers = {
+    "Authorization": "Bearer YOUR_API_KEY"
+}
+response = requests.get("https://api.aaron.ai/v1/documents", headers=headers)
+    ```
+  </Tab>
+  <Tab title="JavaScript" icon="code">
+    ```javascript
+const response = await fetch('https://api.aaron.ai/v1/documents', {
+    headers: {
+        'Authorization': 'Bearer YOUR_API_KEY'
+    }
+});
+    ```
+  </Tab>
+</Tabs>
+
+## OAuth 2.0 Integration
+
+For applications requiring user-specific access, Aaron AI supports OAuth 2.0 flows. This enables seamless integration with existing identity providers.
+
+<Expandable title="OAuth Setup" default-open="false">
+  Configure OAuth 2.0 for your application to enable user authentication.
+
+  ### Client Registration
+  
+  Register your application in the Aaron AI developer console to obtain client credentials.
+  
+  ### Authorization Flow
+  
+  Implement the authorization code flow to securely obtain access tokens.
+</Expandable>
+
+## Security Best Practices
+
+<Callout kind="alert">Never expose API keys in client-side code or public repositories.</Callout>
+
+<ExpandableGroup>
+  <Expandable title="Key Management" default-open="false">
+    Store API keys securely using environment variables or dedicated secret management systems.
+  </Expandable>
+  <Expandable title="Rate Limiting" default-open="false">
+    Monitor your API usage and implement appropriate rate limiting to prevent abuse.
+  </Expandable>
+  <Expandable title="Access Monitoring" default-open="false">
+    Regularly review access logs to detect unusual activity patterns.
+  </Expandable>
+</ExpandableGroup>
+
+## Token Expiration
+
+Access tokens have a limited lifespan for security reasons. The following table shows token lifetimes:
+
+| Token Type | Lifetime | Refreshable |
+|------------|----------|-------------|
+| Access Token | 1 hour | Yes |
+| Refresh Token | 30 days | No |
+| API Key | Indefinite | No |
+
+<CodeGroup tabs="Python,Node.js">
+  ```python
+import requests
+from datetime import datetime
+
+class AaronAIClient:
+    def __init__(self, api_key):
+        self.api_key = api_key
+        self.base_url = "https://api.aaron.ai/v1"
+        self.token_expires = None
+    
+    def _get_headers(self):
+        return {
+            "Authorization": f"Bearer {self.api_key}",
+            "Content-Type": "application/json"
+        }
+```
+  ```javascript
+const AaronAIClient = {
+    apiKey: 'your-api-key',
+    baseUrl: 'https://api.aaron.ai/v1',
+    
+    getHeaders() {
+        return {
+            'Authorization': `Bearer ${this.apiKey}`,
+            'Content-Type': 'application/json'
+        };
+    }
+};
+```
+</CodeGroup>

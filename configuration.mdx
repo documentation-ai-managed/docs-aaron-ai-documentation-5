@@ -1,0 +1,119 @@
+---
+title: Configuration
+description: Configure Aaron AI to match your documentation workflow and integrate with your existing tools.
+---
+
+## Configuration Basics
+
+Aaron AI offers extensive configuration options to customize the platform to your specific documentation needs. From workspace settings to integration preferences, you can tailor every aspect of the experience.
+
+<Columns cols={2}>
+  <Card title="Workspace Setup" icon="settings" href="#workspace-setup">
+    Configure your documentation workspace and team settings.
+  </Card>
+  <Card title="Integration Options" icon="plug" href="#integration-options">
+    Connect Aaron AI with your existing tools and services.
+  </Card>
+</Columns>
+
+## Workspace Setup
+
+<Steps>
+  <Step title="Create Workspace" icon="plus">
+    Start by creating a new workspace or joining an existing one.
+  </Step>
+  <Step title="Configure Settings" icon="settings">
+    Set up basic configuration options like timezone and language preferences.
+  </Step>
+  <Step title="Invite Team Members" icon="users">
+    Add team members and assign appropriate roles and permissions.
+  </Step>
+</Steps>
+
+<Tabs>
+  <Tab title="Basic Settings" icon="sliders">
+    Configure fundamental workspace options including name, description, and visibility settings.
+  </Tab>
+  <Tab title="Advanced Options" icon="tool">
+    Fine-tune performance settings and enable experimental features.
+  </Tab>
+</Tabs>
+
+## Integration Configuration
+
+Aaron AI integrates seamlessly with popular development and documentation tools to streamline your workflow.
+
+<Callout kind="tip">Integrations help automate documentation updates and maintain consistency across platforms.</Callout>
+
+<Expandable title="GitHub Integration" default-open="false">
+  Connect your GitHub repositories to automatically sync documentation changes.
+
+  ### Setup Steps
+  
+  1. Install the Aaron AI GitHub app
+  2. Select repositories to monitor
+  3. Configure webhook settings
+  4. Set up branch protection rules
+</Expandable>
+
+<ExpandableGroup>
+  <Expandable title="Slack Notifications" default-open="false">
+    Receive real-time updates about documentation changes in your Slack channels.
+  </Expandable>
+  <Expandable title="Jira Integration" default-open="false">
+    Link documentation updates to Jira tickets for better project tracking.
+  </Expandable>
+</ExpandableGroup>
+
+## API Configuration
+
+Configure API endpoints and webhooks to extend Aaron AI's functionality.
+
+<CodeGroup tabs="JSON,YAML">
+  ```json
+{
+  "webhooks": [
+    {
+      "url": "https://your-app.com/webhook",
+      "events": ["document.updated", "document.created"],
+      "secret": "your-webhook-secret"
+    }
+  ],
+  "api": {
+    "rate_limit": 1000,
+    "timeout": 30
+  }
+}
+  ```
+  ```yaml
+webhooks:
+  - url: https://your-app.com/webhook
+    events:
+      - document.updated
+      - document.created
+    secret: your-webhook-secret
+api:
+  rate_limit: 1000
+  timeout: 30
+  ```
+</CodeGroup>
+
+## Security Settings
+
+Configure security policies to protect your documentation and ensure compliance.
+
+| Setting | Description | Default Value |
+|---------|-------------|---------------|
+| Password Policy | Minimum password requirements | 8+ characters |
+| Session Timeout | Automatic logout after inactivity | 30 minutes |
+| Two-Factor Auth | Require 2FA for all users | Disabled |
+
+<Update label="2024-09-20" description="v1.1.0" tags={["feature"]}>
+
+## Configuration Updates
+
+- Added advanced integration options
+- Improved webhook configuration UI
+- Enhanced security settings
+
+</Update>
